@@ -108,28 +108,6 @@ export const InfoPanel: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Consejos de Uso */}
-      <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-        <h3 className="font-semibold text-yellow-800 mb-2">
-          💡 Consejos de Uso
-        </h3>
-        <ul className="text-sm text-yellow-700 space-y-1">
-          <li>• Genera algunos procesos antes de iniciar la simulación</li>
-          <li>
-            • Usa el control de delay para observar mejor el comportamiento
-          </li>
-          <li>
-            • Compara los resultados entre FCFS y SJF con/sin expropiación
-          </li>
-          <li>
-            • Los procesos se generan con tiempos de llegada y ráfaga aleatorios
-          </li>
-          <li>
-            • Observa cómo la expropiación afecta el orden de ejecución en SJF
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };
