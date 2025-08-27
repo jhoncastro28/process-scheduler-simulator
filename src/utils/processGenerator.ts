@@ -1,9 +1,15 @@
 import type { Process } from '../types/process';
 
-export const generateRandomProcess = (id: number): Process => {
-  const arrivalTime = Math.floor(Math.random() * 20);
-  const burstTime = Math.floor(Math.random() * 15) + 1;
-  const size = Math.floor(Math.random() * 1000) + 100;
+type ProcessOverrides = {
+  burstTime?: number;
+  arrivalTime?: number;
+  size?: number;
+};
+
+export const generateRandomProcess = (id: number, overrides: ProcessOverrides = {}): Process => {
+  const arrivalTime = overrides.arrivalTime ?? Math.floor(Math.random() * 20);
+  const burstTime = Math.max(1, Math.floor(overrides.burstTime ?? (Math.random() * 15 + 1)));
+  const size = overrides.size ?? (Math.floor(Math.random() * 1000) + 100);
   
   return {
     id,
