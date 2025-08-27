@@ -9,7 +9,7 @@ interface ControlPanelProps {
   onToggleRunning: () => void;
   onReset: () => void;
   onClearAll: () => void;
-  onAddProcess: () => void;
+  onAddProcess: (burstTime?: number) => void;
   onAddMultipleProcesses: () => void;
   onDelayChange: (delay: number) => void;
   onPreemptiveChange: (preemptive: boolean) => void;
@@ -28,6 +28,8 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
   onDelayChange,
   onPreemptiveChange,
 }) => {
+  const [customBTEnabled, setCustomBTEnabled] = React.useState(false);
+  const [customBT, setCustomBT] = React.useState<number>(5);
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-6">
       <div className="flex flex-wrap gap-4 items-center justify-between">
@@ -60,7 +62,7 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
           <div className="border-l border-gray-300 mx-2"></div>
 
           <button
-            onClick={onAddProcess}
+            onClick={() => onAddProcess(customBTEnabled ? customBT : undefined)}
             className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
           >
             <Plus size={16} />
@@ -107,6 +109,28 @@ export const ControlPanel: React.FC<ControlPanelProps> = ({
             >
               SJF con Expropiación (SRTF)
             </label>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="custom-bt"
+              checked={customBTEnabled}
+              onChange={(e) => setCustomBTEnabled(e.target.checked)}
+              className="rounded"
+            />
+            <label htmlFor="custom-bt" className="text-sm font-medium whitespace-nowrap">
+              BT personalizado
+            </label>
+            <input
+              type="number"
+              min={1}
+              max={100}
+              value={customBT}
+              onChange={(e) => setCustomBT(Math.max(1, Number(e.target.value)))}
+              disabled={!customBTEnabled}
+              className="w-20 border rounded px-2 py-1 text-sm disabled:opacity-50"
+            />
           </div>
         </div>
       </div>

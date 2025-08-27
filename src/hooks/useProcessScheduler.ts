@@ -34,8 +34,8 @@ export const useProcessScheduler = () => {
   const intervalRef = useRef<number | null>(null);
 
   // Agregar proceso aleatorio
-  const addRandomProcess = useCallback(() => {
-    const newProcess = generateRandomProcess(processCounter);
+  const addRandomProcess = useCallback((burstTime?: number) => {
+    const newProcess = generateRandomProcess(processCounter, burstTime !== undefined ? { burstTime } : {});
     setOriginalProcesses((prev) => [...prev, newProcess]);
     setFcfsProcesses((prev) => [...prev, { ...newProcess }]);
     setSjfProcesses((prev) => [...prev, { ...newProcess }]);
